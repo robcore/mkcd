@@ -12,33 +12,20 @@ else
   local_cc := gcc
 endif
 
-.PHONY: clean mkcd debug install install-debug
+.PHONY: clean mkcd install 
 clean:
-	@rm -f mkcd mkcd-debug $<
+	@rm -f mkcd $<
 	@echo "Build files removed!" $<
   
 mkcd: 
 	@echo "Compiling..." $<
 	@echo "" $<
-	@$(local_cc) mkcd.c -g0 -Wno-unused-result -Wno-multichar -ansi $(local_flags) -o mkcd $<
+	@$(local_cc) mkcd.c -std=c90 $(local_flags) -o mkcd $<
 	@echo "Done! Final Binary: ./mkcd" $<
   
-debug: 
-	@echo "Compiling..." $<
-	@echo "" $<
-	@$(local_cc) mkcd.c -g3 -Og -ansi $(local_flags) -o mkcd-debug $<
-	@echo "Done! Final Binary: ./mkcd-debug" $<
-
 install:
 	@echo "Installing.." $<
 	@echo "" $<
 	@sudo mkdir -p /usr/local/bin $<
 	@sudo cp mkcd /usr/bin/mkcd $<
-	@echo "Done!" $<
-	
-install-debug:
-	@echo "Installing..." $<
-	@echo "" $<
-	@sudo mkdir -p /usr/local/bin $<
-	@sudo cp mkcd-debug /usr/bin/mkcd $<
 	@echo "Done!" $<
