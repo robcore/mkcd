@@ -1,7 +1,7 @@
 /*-
  * Copyright (c) 1983, 1992, 1993, 2015
  *	The Regents of the University of California.  All rights reserved.
- *  Joe Maples <frap129@gmail.com>
+ * 	Joe Maples <frap129@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
