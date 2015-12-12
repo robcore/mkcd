@@ -20,13 +20,13 @@ clean:
 mkcd: 
 	@echo "Compiling..." $<
 	@echo "" $<
-	@$(local_cc) mkcd.c -g0 -Wno-unused-result -Wno-multichar $(local_flags) -o mkcd $<
+	@$(local_cc) mkcd.c -g0 -Wno-unused-result -Wno-multichar -ansi $(local_flags) -o mkcd $<
 	@echo "Done! Final Binary: ./mkcd" $<
   
 debug: 
 	@echo "Compiling..." $<
 	@echo "" $<
-	@$(local_cc) mkcd.c -g3 -Og $(local_flags) -o mkcd-debug $<
+	@$(local_cc) mkcd.c -g3 -Og -ansi $(local_flags) -o mkcd-debug $<
 	@echo "Done! Final Binary: ./mkcd-debug" $<
 
 install:
