@@ -20,7 +20,7 @@ clean:
 mkcd: 
 	@echo "Compiling..." $<
 	@echo "" $<
-	@$(local_cc) mkcd.c -O3 -g0 -Wno-unused-result -Wno-multichar $(local_flags) -o mkcd $<
+	@$(local_cc) mkcd.c -g0 -Wno-unused-result -Wno-multichar $(local_flags) -o mkcd $<
 	@echo "Done! Final Binary: ./mkcd" $<
   
 debug: 
