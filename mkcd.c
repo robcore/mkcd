@@ -1,8 +1,7 @@
-
-
-/*
- * Copyright (c) 1983, 1992, 1993
+/*-
+ * Copyright (c) 1983, 1992, 1993, 2015
  *	The Regents of the University of California.  All rights reserved.
+ * 	Joe Maples <frap129@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -12,10 +11,6 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. All advertising materials mentioning features or use of this software
- *    must display the following acknowledgement:
- *	This product includes software developed by the University of
- *	California, Berkeley and its contributors.
  * 4. Neither the name of the University nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
@@ -33,19 +28,19 @@
  * SUCH DAMAGE.
  */
 
+#if 0
 #ifndef lint
 static char const copyright[] =
-"@(#) Copyright (c) 1983, 1992, 1993\n\
-	The Regents of the University of California.  All rights reserved.\n";
+"@(#) Copyright (c) 1983, 1992, 1993, 2015\n\
+	The Regents of the University of California.  All rights reserved.\n\
+	Joe Maples <frap129@gmail.com> \n";
 #endif /* not lint */
 
 #ifndef lint
-#if 0
-static char sccsid[] = "@(#)mkdir.c	8.2 (Berkeley) 1/25/94";
-#endif
+static char sccsid[] = "@(#)mkcd.c	1.0 12/12/15";
 #endif /* not lint */
+#endif
 #include <sys/cdefs.h>
-__RCSID("$FreeBSD: src/bin/mkdir/mkdir.c,v 1.26 2002/06/30 05:13:54 obrien Exp $");
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -68,7 +63,8 @@ int
 main(int argc, char *argv[])
 {
 	int ch, exitval, success, pflag;
-	mode_t omode, *set = (mode_t *)NULL;
+	mode_t omode;
+	void *set = NULL;
 	char *mode;
 
 	omode = pflag = 0;
@@ -115,10 +111,12 @@ main(int argc, char *argv[])
 				warn("%s", *argv);
 			success = 0;
 		} else if (vflag)
-			(void)printf("mkdir: created directory '%s'\n", *argv);
+			(void)printf("%s\n", *argv);
 		
 		if (!success)
 			exitval = 1;
+		else
+		  chdir(*argv);
 		/*
 		 * The mkdir() and umask() calls both honor only the low
 		 * nine bits, so if you try to set a mode including the
@@ -153,7 +151,7 @@ build(char *path, mode_t omode)
 		else if (p[0] != '/')
 			continue;
 		*p = '\0';
-		if (p[1] == '\0')
+		if (!last && p[1] == '\0')
 			last = 1;
 		if (first) {
 			/*
@@ -209,6 +207,7 @@ void
 usage(void)
 {
 
-	(void)fprintf(stderr, "usage: mkdir [-pv] [-m mode] directory ...\n");
+	(void)fprintf(stderr,
+	    "usage: mkcd [-pv] [-m mode] directory_name ...\n");
 	exit (EX_USAGE);
 }
