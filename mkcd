@@ -2,10 +2,10 @@
 # Copyright Joe Maples <frap129@gmail.com> (c) 2015
 
 # Unset variables that will be used
-unset PFLAG
-unset VFLAG
-unset MFLAG
-unset DIRPATH
+unset PFLAG;
+unset VFLAG;
+unset MFLAG;
+unset DIRPATH;
 
 # Check for first argument
 if [ -z "$1" ]; then
@@ -17,7 +17,7 @@ if [ -z "$1" ]; then
     MFLAG=$1;
   else
     DIRPATH=$1;
-  fi
+  fi;
 fi;
 
 # Check for second argument
@@ -30,7 +30,7 @@ if [ -z "$2" ]; then
     MFLAG=$2;
   else
     DIRPATH=$2;
-  fi
+  fi;
 fi;
 
 # Check for third argument
@@ -43,7 +43,7 @@ if [ -z "$3" ]; then
     MFLAG=$3;
   else
     DIRPATH=$3;
-  fi
+  fi;
 fi;
 
 # Check for foruth arument
@@ -56,7 +56,7 @@ if [ -z "$4" ]; then
     MFLAG=$4;
   else
     DIRPATH=$4;
-  fi
+  fi;
 fi;
 
 # Make sure DIRPATH is set
